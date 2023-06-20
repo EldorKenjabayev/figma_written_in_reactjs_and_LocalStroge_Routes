@@ -1,47 +1,43 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
 import './LoginUser.css';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 export default class LoginUser extends Component {
   state = {
     userEmail: '',
     userPassword: '',
     loginError: false,
+    loggedIn: false,
   };
 
   componentDidMount() {
-    // Получение сохраненных данных из localStorage
-    const savedEmail = localStorage.getItem('email');
-    const savedPassword = localStorage.getItem('password');
-
-    // Обновление состояния компонента с полученными данными
+    const savedRegistrations = JSON.parse(localStorage.getItem('registrations')) || [];
     this.setState({
-      userEmail: savedEmail || '',
-      userPassword: savedPassword || '',
+      registrations: savedRegistrations,
     });
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const { userEmail, userPassword } = this.state;
+    const { userEmail, userPassword, registrations } = this.state;
+    const foundRegistration = registrations.find(
+      (registration) => registration.email === userEmail && registration.password === userPassword
+    );
 
-    // Проверка введенных данных
-    if (
-      userEmail === localStorage.getItem('email') &&
-      userPassword === localStorage.getItem('password')
-    ) {
-      // Данные совпадают - выполнение необходимой логики, например, перенаправление на другую страницу
-      console.log('Авторизация успешна');
+    if (foundRegistration) {
+      this.setState({ loggedIn: true });
     } else {
-      // Данные не совпадают - отображение ошибки
       this.setState({ loginError: true });
     }
   };
 
   render() {
-    const { userEmail, userPassword, loginError } = this.state;
+    const { userEmail, userPassword, loginError, loggedIn } = this.state;
+
+    if (loggedIn) {
+      return <Navigate to="/" replace />;
+    }
 
     return (
       <div>
@@ -65,7 +61,7 @@ export default class LoginUser extends Component {
               alignItems: 'center',
               flexDirection: 'column',
             }}
-            onSubmit={this.handleSubmit} // Добавляем обработчик события onSubmit
+            onSubmit={this.handleSubmit}
           >
             <input
               type="email"
@@ -73,7 +69,7 @@ export default class LoginUser extends Component {
               value={userEmail}
               onChange={(event) => this.setState({ userEmail: event.target.value })}
               required
-            />{' '}
+            />
             <br />
             <input
               type="password"
@@ -81,13 +77,11 @@ export default class LoginUser extends Component {
               value={userPassword}
               onChange={(event) => this.setState({ userPassword: event.target.value })}
               required
-            />{' '}
+            />
             <br />
             {loginError && <p style={{ color: 'red' }}>Неверный email или пароль</p>}
             <button type="submit">Продолжить</button>
-            <Link to="/sign_up">        
-            <a href="/">Регистрация</a>
-            </Link>
+            <Link to="/sign_up">Регистрация</Link>
           </form>
         </div>
       </div>

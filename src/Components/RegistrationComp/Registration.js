@@ -1,3 +1,4 @@
+// Компонент Registration
 import React, { Component } from 'react';
 import './Registration.css';
 import { Link } from 'react-router-dom';
@@ -26,15 +27,13 @@ export default class Registration extends Component {
     this.setState({ password: event.target.value });
   };
 
-  preventDefault = (event) => {
-    event.preventDefault();
-  };
-
   register = (event) => {
+    event.preventDefault();
+
     const { email, name, surname, password } = this.state;
-    const registrations = JSON.parse(localStorage.getItem('registrations')) || [];
+    const existingRegistrations = JSON.parse(localStorage.getItem('registrations')) || [];
     const newRegistration = { email, name, surname, password };
-    registrations.push(newRegistration);
+    const registrations = [...existingRegistrations, newRegistration];
     localStorage.setItem('registrations', JSON.stringify(registrations));
 
     this.setState({
@@ -43,8 +42,6 @@ export default class Registration extends Component {
       surname: '',
       password: '',
     });
-
-    this.preventDefault(event);
   };
 
   render() {
@@ -72,6 +69,7 @@ export default class Registration extends Component {
               alignItems: 'center',
               flexDirection: 'column',
             }}
+            onSubmit={this.register}
           >
             <input type="email" placeholder="Почта" value={email} onChange={this.addEmail} required />
             <br />
