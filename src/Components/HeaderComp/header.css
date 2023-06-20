@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.boxHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    cursor: pointer;
+}
+
+.boxHeader img {
+    width: 80px;
+}
+
+.boxHeader h4 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+hr {
+    padding-top: 1px;
+    background: #E0E0E0;
+    margin-top: 2vh;
+}
+
+hr::before{
+    content: '';
+    width: 15%;
+    height: 10px;
+    background-color: #000;
+}

@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    outline: none;
+}
+
+.Container {
+    width: 100%;
+    margin: auto;
+}
+
+.Naigation {
+    width: 100%;
+    height: 110px;
+    background-color: #00093C;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #000;
+    gap: 5%;
+
+}
+
+.Nav_links ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4vw;
+}
+
+.Nav_links ul li a {
+    font-weight: 500;
+    color: #fff;
+    font-size: 14px;
+}
+
+.Nav_links ul li a img {
+    width: 14px;
+    position: relative;
+    top: 1px;
+}
+
+.NavLocation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1vw;
+}
+
+.option{
+    padding: 10px 20px;
+}
+
+.RegistrationAndNumber :nth-child(1) {
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+}
+.RegistrationAndNumber :nth-child(2){
+    font-weight: 500;
+    font-size: 16px;
+    color: #fff;
+} 

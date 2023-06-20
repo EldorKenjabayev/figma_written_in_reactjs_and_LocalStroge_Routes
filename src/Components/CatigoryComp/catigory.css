@@ -1,0 +1,6 @@
+.Catigory ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 15px;
+}
